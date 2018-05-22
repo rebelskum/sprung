@@ -43,42 +43,43 @@ class Form extends Component {
   }
   render() {
     return (
-          <form onSubmit={this.handleSubmit}>
+        <div>
+          <form className="form container" onSubmit={this.handleSubmit}>
             <div>
-              <label>
+              <label className="label">
                 First Name
-                <input type='text' value={this.state.firstName} onChange={this.handleFirstName} />
+                <input className="text-input" type='text' value={this.state.firstName} onChange={this.handleFirstName} />
               </label>
             </div>
             <div>
-              <label>
+              <label className="label">
                 Last Name
-                <input type='text' value={this.state.lastName} onChange={this.handleLastName} />
+                <input className="text-input" type='text' value={this.state.lastName} onChange={this.handleLastName} />
               </label>
             </div>
             <div>
-              <label>
+              <label className="label">
                 Age
-                <input type='number' value={this.state.age} onChange={this.handleAge} />
+                <input className="text-input" type='number' value={this.state.age} onChange={this.handleAge} />
               </label>
             </div>
             <div>
-              <label>
+              <label className="label">
                 Sex
-                <select>
+                <select className="text-input">
                   <option value='male'>Male</option>
                   <option value='female'>Female</option>
                 </select>
               </label>
             </div>
             <div>
-              <label>
+              <label className="label">
                 Email
-                <input type='email' value={this.state.email} onChange={this.handleEmail} />
+                <input className="text-input" type='email' value={this.state.email} onChange={this.handleEmail} />
               </label>
             </div>
-            <input type="submit" value="Submit" />
           </form>
+        </div>
     );
   }
 }
