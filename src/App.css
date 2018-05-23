@@ -23,6 +23,7 @@ html, body {
 }
 
 .App-intro {
+  padding-top: 2em;
   font-size: large;
 }
 

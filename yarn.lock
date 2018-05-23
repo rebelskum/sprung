@@ -5580,9 +5580,20 @@ react-error-overlay@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.0.tgz#d198408a85b4070937a98667f500c832f86bd5d4"
 
+react-flip-move@^3.0.1:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-flip-move/-/react-flip-move-3.0.2.tgz#2f6f16ca6cb0a8490fba15a98b3440a76127e825"
+
 react-image-crop@^3.0.11:
   version "3.0.11"
   resolved "https://registry.yarnpkg.com/react-image-crop/-/react-image-crop-3.0.11.tgz#c1588805d8d220b7b70332f04161aa1e04e13efc"
+
+react-images-upload@^1.0.95:
+  version "1.0.95"
+  resolved "https://registry.yarnpkg.com/react-images-upload/-/react-images-upload-1.0.95.tgz#4069697451b179c8e77640c492f9dee351a446a1"
+  dependencies:
+    react "^16.2.0"
+    react-flip-move "^3.0.1"
 
 react-scripts@1.1.4:
   version "1.1.4"
@@ -5629,7 +5640,7 @@ react-scripts@1.1.4:
   optionalDependencies:
     fsevents "^1.1.3"
 
-react@^16.3.2:
+react@^16.2.0, react@^16.3.2:
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
   dependencies:

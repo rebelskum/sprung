@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
+import ImageUploader from 'react-images-upload';
 import 'react-image-crop/dist/ReactCrop.css';
 import ReactCrop, { makeAspectCrop } from 'react-image-crop';
+
+function getBase64(file) {
+  var reader = new FileReader();
+  reader.readAsDataURL(file);
+  return new Promise(resolve => {
+    reader.onload = function () {
+     console.log(reader.result);
+     resolve(reader.result);
+    };
+    reader.onerror = function (error) {
+     console.log('Error: ', error);
+    };
+  })
+}
 
 function getCroppedImage(image, pixelCrop) {
   const canvas = document.createElement('canvas');
@@ -30,21 +45,34 @@ class Picture extends Component {
     super(props);
     this.state = {
       isCropping: false,
-      croppedImg: 'bono.jpg',
-      picture: '',
+      img: '',
+      croppedImg: '',
       crop: {
         x: 20,
-        y: 10,
-        width: 30,
-        height: 40
+        y: 20,
+        width: 50,
+        height: 50
       }
     };
+
+    this.handleOnDrop = this.handleOnDrop.bind(this);
     this.handleGetCroppedImage = this.handleGetCroppedImage.bind(this);
     this.handleIsCropping = this.handleIsCropping.bind(this);
   }
+
+  handleOnDrop(pictures) {
+    getBase64(pictures[0]).then(picture => {
+      this.setState({
+        img: picture,
+        isCropping: true,
+      });
+      console.log(pictures);
+    })
+  }
+
   handleGetCroppedImage(e) {
     var img = new Image();
-    img.src = 'bono.jpg';
+    img.src = this.state.img;
     this.setState({
       croppedImg: getCroppedImage(img, this.state.crop),
       isCropping: false,
@@ -64,8 +92,8 @@ class Picture extends Component {
   render() {
       if (this.state.isCropping){
         return(
-          <div >
-            <ReactCrop src="bono.jpg" crop={this.state.crop} onChange={
+          <div>
+            <ReactCrop src={this.state.img} crop={this.state.crop} onChange={
               (crop) => {
               this.setState({ crop });
             }}/>
@@ -75,8 +103,11 @@ class Picture extends Component {
         )
       } else {
         return (
-          <img src={this.state.croppedImg} onClick={this.handleIsCropping}/>
-        )
+          <div>
+            <img src={this.state.croppedImg} onClick={this.handleIsCropping}/>
+            <ImageUploader withIcon={false} withLabel={false} buttonText="Choose image" onChange={this.handleOnDrop} imgExtension={[".jpg", ".gif", ".png"]} maxFileSize={5242880}/>
+          </div>
+        );
       }
   }
 }
