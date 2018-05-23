@@ -56,9 +56,9 @@ html, body {
 .label {
   display: flex;
   padding: 1em 0;
-  font-family: sans-serif;
+  font-family: Helvetica, sans-serif;
   font-weight: bold;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ececec;
 }
 
 .submit {
