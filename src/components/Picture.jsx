@@ -17,23 +17,29 @@ function getBase64(file) {
   })
 }
 
-function getCroppedImage(image, pixelCrop) {
+function getCroppedImage(image, cropRect) {
   const canvas = document.createElement('canvas');
-  canvas.width = pixelCrop.width;
-  canvas.height = pixelCrop.height;
+  const imgWidth = image.naturalWidth;
+  const imgHeight = image.naturalHeight;
+  const canvasWidth = (cropRect.width * imgWidth) / 100;
+  const canvasHeight = (cropRect.height * imgHeight) / 100;
+  canvas.width = canvasWidth; //imgWidth;
+  canvas.height = canvasHeight;//imgHeight;
   const ctx = canvas.getContext('2d');
-  console.log(pixelCrop);
+  // const img = document.getElementById('imageid');
+  console.log(cropRect, "pixel crop here");
+  console.log(imgWidth, "image width here");
 
   ctx.drawImage(
     image,
-    pixelCrop.x,
-    pixelCrop.y,
-    pixelCrop.width,
-    pixelCrop.height,
+    (cropRect.x * imgWidth) / 100,
+    (cropRect.y * imgHeight) / 100,
+    canvasWidth,
+    canvasHeight,
     0,
     0,
-    pixelCrop.width,
-    pixelCrop.height
+    canvasWidth,
+    canvasHeight
   );
 
   return canvas.toDataURL('image/jpeg')
@@ -66,8 +72,7 @@ class Picture extends Component {
         img: picture,
         isCropping: true,
       });
-      console.log(pictures);
-    })
+    });
   }
 
   handleGetCroppedImage(e) {
@@ -93,9 +98,12 @@ class Picture extends Component {
       if (this.state.isCropping){
         return(
           <div>
+            <h1>Hello world</h1>
             <ReactCrop src={this.state.img} crop={this.state.crop} onChange={
-              (crop) => {
-              this.setState({ crop });
+              (crop, pixelCrop) => {
+                console.log('Crop: ', crop);
+                console.log('pixelCrop: ', pixelCrop);
+                this.setState({ crop });
             }}/>
             <br/>
             <button onClick={this.handleGetCroppedImage}>Crop</button>
