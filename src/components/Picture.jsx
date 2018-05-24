@@ -98,7 +98,6 @@ class Picture extends Component {
       if (this.state.isCropping){
         return(
           <div>
-            <h1>Hello world</h1>
             <ReactCrop src={this.state.img} crop={this.state.crop} onChange={
               (crop, pixelCrop) => {
                 console.log('Crop: ', crop);
@@ -112,7 +111,9 @@ class Picture extends Component {
       } else {
         return (
           <div>
-            <img src={this.state.croppedImg} onClick={this.handleIsCropping}/>
+            <div className="profile-image-container">
+              <img className="profile-image" src={this.state.croppedImg} onClick={this.handleIsCropping}/>
+            </div>
             <ImageUploader withIcon={false} withLabel={false} buttonText="Choose image" onChange={this.handleOnDrop} imgExtension={[".jpg", ".gif", ".png"]} maxFileSize={5242880}/>
           </div>
         );
